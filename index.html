@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texas Silicon</title>
+<meta name="description" content="Texas Silicon is a student-run engineering organization that designs, verifies, and tapes out custom silicon chips.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8FAFC;
+    --surface: #FFFFFF;
+    --ink: #0B1F3A;
+    --muted: #475569;
+    --line: #E2E8F0;
+    --accent: #0F9488;
+    --accent-ink: #FFFFFF;
+    --grid: rgba(15,148,136,.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #07111F; --surface: #0D1B2E; --ink: #E5EDF7; --muted: #94A3B8;
+      --line: #1E2D44; --accent: #2DD4BF; --accent-ink: #04201D; --grid: rgba(45,212,191,.08);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #07111F; --surface: #0D1B2E; --ink: #E5EDF7; --muted: #94A3B8;
+    --line: #1E2D44; --accent: #2DD4BF; --accent-ink: #04201D; --grid: rgba(45,212,191,.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 17px/1.6 Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+  .mono { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+  .brand img { width: 32px; height: 32px; }
+  .nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 15px; }
+  .nav ul a { color: var(--muted); text-decoration: none; }
+  .nav ul a:hover { color: var(--ink); }
+  @media (max-width: 560px) { .nav ul li:not(:last-child) { display: none; } }
+
+  .hero { position: relative; overflow: hidden; padding: 96px 0 88px; border-bottom: 1px solid var(--line); }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px; mask-image: radial-gradient(ellipse 70% 70% at 50% 30%, #000 30%, transparent 75%); }
+  .eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 16px; }
+  h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.02; letter-spacing: -.035em; margin: 0 0 22px; font-weight: 700; }
+  h1 span { color: var(--accent); }
+  .lede { max-width: 620px; font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); margin: 0 0 36px; }
+  .btn { display: inline-block; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 16px; }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); margin-left: 10px; }
+  @media (max-width: 420px) { .btn-ghost { margin: 12px 0 0; } }
+
+  section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.025em; line-height: 1.1; margin: 0 0 14px; }
+  .sub { color: var(--muted); max-width: 640px; margin: 0 0 40px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .grid.two { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 900px) { .grid.four { grid-template-columns: repeat(4, 1fr); } .grid.three { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 640px) and (max-width: 899px) { .grid.four, .grid.three { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .card .tag { font-size: 12px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+  .card h3 { margin: 0 0 8px; font-size: 19px; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+  .facts { display: grid; gap: 0; grid-template-columns: 1fr; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+  @media (min-width: 720px) { .facts { grid-template-columns: repeat(3, 1fr); } }
+  .fact { padding: 22px; border-bottom: 1px solid var(--line); }
+  @media (min-width: 720px) { .fact { border-bottom: 0; border-right: 1px solid var(--line); } .fact:last-child { border-right: 0; } }
+  .fact b { display: block; font-size: 20px; letter-spacing: -.01em; margin-bottom: 4px; }
+  .fact span { color: var(--muted); font-size: 15px; }
+
+  .contact { text-align: center; }
+  .contact .email { font-size: clamp(20px, 3.2vw, 28px); font-weight: 600; word-break: break-all; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 13.5px; }
+  footer p { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><svg width="32" height="32" viewBox="0 0 120 120" aria-hidden="true"><g fill="#14B8A6"><rect x="30" y="6" width="8" height="14" rx="2"/><rect x="48" y="6" width="8" height="14" rx="2"/><rect x="66" y="6" width="8" height="14" rx="2"/><rect x="84" y="6" width="8" height="14" rx="2"/><rect x="30" y="100" width="8" height="14" rx="2"/><rect x="48" y="100" width="8" height="14" rx="2"/><rect x="66" y="100" width="8" height="14" rx="2"/><rect x="84" y="100" width="8" height="14" rx="2"/><rect x="6" y="30" width="14" height="8" rx="2"/><rect x="6" y="48" width="14" height="8" rx="2"/><rect x="6" y="66" width="14" height="8" rx="2"/><rect x="6" y="84" width="14" height="8" rx="2"/><rect x="100" y="30" width="14" height="8" rx="2"/><rect x="100" y="48" width="14" height="8" rx="2"/><rect x="100" y="66" width="14" height="8" rx="2"/><rect x="100" y="84" width="14" height="8" rx="2"/></g><rect x="18" y="18" width="84" height="84" rx="10" fill="#0B1F3A"/><rect x="27" y="27" width="66" height="66" rx="5" fill="none" stroke="#14B8A6" stroke-width="2" opacity=".55"/><text x="60" y="71" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, Consolas, monospace" font-size="32" font-weight="700" fill="#F8FAFC">TS</text></svg>Texas Silicon</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#teams">Teams</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#join">Join</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow mono">Student chip design team · Austin, TX</p>
+      <h1>We build real chips,<br><span>not just simulations.</span></h1>
+      <p class="lede">Texas Silicon is a student-run engineering organization that designs, verifies, and tapes out custom silicon, with a focus on AI inference accelerators.</p>
+      <a class="btn btn-primary" href="#join">Join the team</a><a class="btn btn-ghost" href="mailto:texassilicon028@gmail.com">Contact us</a>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow mono">About</p>
+      <h2>Hands-on silicon, start to finish</h2>
+      <p class="sub">Members learn through an apprenticeship modeled on a real chip design flow, from architecture and RTL through synthesis, place and route, and signoff, using both industry and open-source tools. The goal is practical experience that carries straight into semiconductor internships and full-time roles.</p>
+      <div class="facts">
+        <div class="fact"><b>Real tapeouts</b><span>Members contribute to designs headed for fabrication.</span></div>
+        <div class="fact"><b>No experience needed</b><span>New members ramp up with guided starter tasks.</span></div>
+        <div class="fact"><b>Undergrad &amp; grad</b><span>Open to undergraduate and graduate students.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="teams">
+    <div class="wrap">
+      <p class="eyebrow mono">Teams</p>
+      <h2>Four teams, one flow</h2>
+      <p class="sub">Every member joins one technical team and works alongside experienced leads.</p>
+      <div class="grid four">
+        <div class="card"><div class="tag mono">01</div><h3>Architecture</h3><p>Workload analysis, performance modeling, and system specification.</p></div>
+        <div class="card"><div class="tag mono">02</div><h3>RTL Design</h3><p>SystemVerilog implementation of accelerator blocks.</p></div>
+        <div class="card"><div class="tag mono">03</div><h3>Physical Design</h3><p>Synthesis, place and route, timing closure, and signoff.</p></div>
+        <div class="card"><div class="tag mono">04</div><h3>Design Verification</h3><p>Testbenches, reference models, and formal equivalence checks.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow mono">Projects</p>
+      <h2>What we're building</h2>
+      <p class="sub">Our work centers on hardware for running AI models efficiently on small devices, built on open hardware standards like RISC-V.</p>
+      <div class="grid three">
+        <div class="card"><div class="tag mono">Flagship</div><h3>Reef NPU</h3><p>An AI inference accelerator for on-device language models, built by all four teams.</p></div>
+        <div class="card"><div class="tag mono">Accelerator blocks</div><h3>KV cache &amp; attention</h3><p>Hardware for compressing and managing the memory that transformer models use while generating text.</p></div>
+        <div class="card"><div class="tag mono">Open-source silicon</div><h3>130nm tapeouts</h3><p>Smaller test chips on the open SkyWater 130nm process, so members see a design all the way through to fabrication.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="contact">
+    <div class="wrap">
+      <p class="eyebrow mono">Join</p>
+      <h2>Recruiting every Fall and Spring</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto">We recruit a new cohort during the first two to three weeks of each long semester. Members typically spend 10–15 hours a week on team work. Reach out any time with questions.</p>
+      <p class="email"><a href="mailto:texassilicon028@gmail.com">texassilicon028@gmail.com</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Texas Silicon</p>
+    <p>Texas Silicon is a student-run organization. This is not an official website of The University of Texas at Austin, and its content does not necessarily represent the views of the University.</p>
+  </div>
+</footer>
+</body>
+</html>
