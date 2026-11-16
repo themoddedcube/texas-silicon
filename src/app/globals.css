@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces — orthos parchment + white cards */
+  --color-bg: #fbf6f0;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f5ede3;
+
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #6b6b6b;
+  --color-border: #e5e0da;
+
+  --color-accent: #0f766e;
+  --color-accent-hover: #0d9488;
+  --color-accent-light: rgba(15, 118, 110, 0.08);
+  --color-accent-contrast: #ffffff;
+
+  --radius-card: 12px;
+  --radius-button: 8px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
+
+  --max-width-container: 1200px;
+
+  --animate-marquee: marquee var(--duration, 30s) linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1.5rem)));
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans text-[17px] leading-[1.47] tracking-[-0.022em] antialiased;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .animate-fade-up {
+    animation: fadeUp 0.75s var(--ease-apple) forwards;
+    opacity: 0;
+  }
+
+  .reveal {
+    @apply translate-y-6 opacity-0 transition-[opacity,transform] duration-[900ms];
+    transition-timing-function: var(--ease-apple);
+  }
+
+  .reveal.in {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .final-cta-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 40%,
+      transparent 80%
+    );
+  }
+}
+
+/* ---- Newsletter (web edition) ---- */
+@layer components {
+  /* Home-page photo collage. Mobile: 2 columns, the anchor photo spans both. */
+  .collage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "a a"
+      "b c"
+      "d d"
+      "e e";
+  }
+  .collage-a {
+    grid-area: a;
+  }
+  .collage-b {
+    grid-area: b;
+  }
+  .collage-c {
+    grid-area: c;
+  }
+  .collage-d {
+    grid-area: d;
+  }
+  .collage-e {
+    grid-area: e;
+  }
+  .collage > li {
+    aspect-ratio: 4 / 3;
+  }
+  .collage > .collage-d,
+  .collage > .collage-e {
+    aspect-ratio: 16 / 7;
+  }
+  @media (min-width: 768px) {
+    .collage {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-auto-rows: 200px;
+      grid-template-areas:
+        "a a b b c c"
+        "a a d d d e";
+    }
+    .collage > li,
+    .collage > .collage-d,
+    .collage > .collage-e {
+      aspect-ratio: auto;
+    }
+  }
+  @media (min-width: 1024px) {
+    .collage {
+      grid-auto-rows: 250px;
+    }
+  }
+}

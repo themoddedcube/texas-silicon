@@ -1,0 +1,105 @@
+export type Sponsor =
+  | { kind: "text"; name: string }
+  | {
+      kind: "logo";
+      name: string;
+      src: string;
+      width: number;
+      height: number;
+      href?: string;
+      /** Optional Tailwind override for the rendered logo size (e.g. logos with extra whitespace). */
+      imgClassName?: string;
+    };
+
+export const sponsors: Sponsor[] = [
+  // Established industry — lead the marquee so these are visible on first entry.
+  {
+    kind: "logo",
+    name: "Cadence",
+    src: "/sponsors/cadence.png",
+    width: 1200,
+    height: 300,
+    href: "https://www.cadence.com",
+  },
+  {
+    kind: "logo",
+    name: "Synopsys",
+    src: "/sponsors/synopsys_logo.svg_.webp",
+    width: 1280,
+    height: 290,
+    href: "https://www.synopsys.com",
+  },
+  {
+    kind: "logo",
+    name: "Amazon Web Services",
+    src: "/sponsors/aws.webp",
+    width: 1280,
+    height: 767,
+    href: "https://aws.amazon.com",
+    // Tall wordmark + smile: give it the full card height so it doesn't read small.
+    imgClassName: "max-h-14 w-auto max-w-[110px] object-contain",
+  },
+  {
+    kind: "logo",
+    name: "Arm",
+    src: "/sponsors/arm.svg",
+    width: 4332,
+    height: 1319,
+    href: "https://www.arm.com",
+    // Short, wide wordmark: cap height so it sits level with its neighbors.
+    imgClassName: "max-h-7 w-auto max-w-[88px] object-contain",
+  },
+  {
+    kind: "logo",
+    name: "Hudson River Trading",
+    src: "/sponsors/hrt.png",
+    width: 721,
+    height: 420,
+    href: "https://www.hudsonrivertrading.com",
+  },
+  {
+    kind: "logo",
+    name: "Silicon Labs",
+    src: "/sponsors/Silicon_Labs_2015.svg.png",
+    width: 1280,
+    height: 659,
+    href: "https://www.silabs.com",
+  },
+  // Startups
+  {
+    kind: "logo",
+    name: "Bronco AI",
+    src: "/sponsors/bronco-ai.jpg",
+    width: 1024,
+    height: 512,
+    href: "https://www.bronco.ai/",
+  },
+  {
+    kind: "logo",
+    name: "ChipAgents",
+    src: "/sponsors/chipagents.png",
+    width: 480,
+    height: 280,
+    href: "https://chipagents.ai",
+    imgClassName: "max-h-16 w-auto max-w-[210px] object-contain",
+  },
+  {
+    kind: "logo",
+    name: "Sigmantic AI",
+    src: "/sponsors/SigmanticAIOfficial.png",
+    width: 1254,
+    height: 1254,
+    href: "https://www.sigmanticai.com/",
+  },
+  // Labs
+  {
+    kind: "logo",
+    name: "Laboratory for Computer Architecture",
+    src: "/sponsors/lca.jpg",
+    width: 425,
+    height: 80,
+    href: "https://lca.ece.utexas.edu",
+  },
+  // UTDA's logo includes UT marks (Tower, wordmark, longhorn), so show the name as text.
+  { kind: "text", name: "Design Automation Lab" },
+];
